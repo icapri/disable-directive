@@ -37,7 +37,6 @@ export class DisableDirective {
         case 'TEXTAREA':
           // workaround, cos cases do not enable type security
           (element as DisableableHTMLElement).disabled = true;
-          element.setAttribute('disabled', isDisabled ? 'true' : 'false');
           break;
         default:
           element.style.pointerEvents = 'none';
