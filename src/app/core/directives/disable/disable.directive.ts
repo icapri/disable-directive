@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-type DisableableHTMLElement =
+export type DisableableHTMLElement =
   | HTMLButtonElement
   | HTMLFieldSetElement
   | HTMLInputElement
