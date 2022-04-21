@@ -24,24 +24,21 @@ export class DisableDirective {
   }
 
   public set disabled(isDisabled: boolean) {
-    if (isDisabled) {
-      const element: HTMLElement = this.element;
-      switch (element.tagName) {
-        case 'BUTTON':
-        case 'FIELDSET':
-        case 'INPUT':
-        case 'KEYGEN':
-        case 'OPTGROUP':
-        case 'OPTION':
-        case 'SELECT':
-        case 'TEXTAREA':
-          // workaround, cos cases do not enable type security
-          (element as DisableableHTMLElement).disabled = true;
-          break;
-        default:
-          element.style.pointerEvents = 'none';
-          break;
-      }
+    const element: HTMLElement = this.element;
+    switch (element.tagName) {
+      case 'BUTTON':
+      case 'FIELDSET':
+      case 'INPUT':
+      case 'KEYGEN':
+      case 'OPTGROUP':
+      case 'OPTION':
+      case 'SELECT':
+      case 'TEXTAREA':
+        (element as DisableableHTMLElement).disabled = isDisabled;
+        break;
+      default:
+        element.style.pointerEvents = isDisabled ? 'none' : 'auto';
+        break;
     }
   }
 
