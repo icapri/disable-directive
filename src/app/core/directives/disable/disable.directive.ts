@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-export type DisableableHTMLElement =
+export type HTMLTagWithDisabledAttr =
   | HTMLButtonElement
   | HTMLFieldSetElement
   | HTMLInputElement
@@ -9,7 +9,7 @@ export type DisableableHTMLElement =
   | HTMLSelectElement
   | HTMLTextAreaElement;
 
-export enum DisableableHTMLTagType {
+export enum HTMLTagTypeWithDisabledAttr {
   BUTTON = 'BUTTON',
   FIELDSET = 'FIELDSET',
   INPUT = 'INPUT',
@@ -37,15 +37,16 @@ export class DisableDirective {
   public set disabled(isDisabled: boolean) {
     const element: HTMLElement = this.element;
     switch (element.tagName) {
-      case DisableableHTMLTagType.BUTTON:
-      case DisableableHTMLTagType.FIELDSET:
-      case DisableableHTMLTagType.INPUT:
-      case DisableableHTMLTagType.KEYGEN:
-      case DisableableHTMLTagType.OPTGROUP:
-      case DisableableHTMLTagType.OPTION:
-      case DisableableHTMLTagType.SELECT:
-      case DisableableHTMLTagType.TEXTAREA:
-        (element as DisableableHTMLElement).disabled = isDisabled;
+      case HTMLTagTypeWithDisabledAttr.BUTTON:
+      case HTMLTagTypeWithDisabledAttr.FIELDSET:
+      case HTMLTagTypeWithDisabledAttr.INPUT:
+      case HTMLTagTypeWithDisabledAttr.KEYGEN:
+      case HTMLTagTypeWithDisabledAttr.OPTGROUP:
+      case HTMLTagTypeWithDisabledAttr.OPTION:
+      case HTMLTagTypeWithDisabledAttr.SELECT:
+      case HTMLTagTypeWithDisabledAttr.TEXTAREA:
+        // casting is necessary here
+        (<HTMLTagWithDisabledAttr>element).disabled = isDisabled;
         break;
       default:
         element.style.pointerEvents = isDisabled ? 'none' : 'auto';
