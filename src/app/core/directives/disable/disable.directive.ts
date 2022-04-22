@@ -9,6 +9,17 @@ export type DisableableHTMLElement =
   | HTMLSelectElement
   | HTMLTextAreaElement;
 
+export enum DisableableHTMLTagType {
+  BUTTON = 'BUTTON',
+  FIELDSET = 'FIELDSET',
+  INPUT = 'INPUT',
+  KEYGEN = 'KEYGEN',
+  OPTGROUP = 'OPTGROUP',
+  OPTION = 'OPTION',
+  SELECT = 'SELECT',
+  TEXTAREA = 'TEXTAREA',
+}
+
 @Directive({
   selector: '[disable]',
   exportAs: 'disable',
@@ -26,14 +37,14 @@ export class DisableDirective {
   public set disabled(isDisabled: boolean) {
     const element: HTMLElement = this.element;
     switch (element.tagName) {
-      case 'BUTTON':
-      case 'FIELDSET':
-      case 'INPUT':
-      case 'KEYGEN':
-      case 'OPTGROUP':
-      case 'OPTION':
-      case 'SELECT':
-      case 'TEXTAREA':
+      case DisableableHTMLTagType.BUTTON:
+      case DisableableHTMLTagType.FIELDSET:
+      case DisableableHTMLTagType.INPUT:
+      case DisableableHTMLTagType.KEYGEN:
+      case DisableableHTMLTagType.OPTGROUP:
+      case DisableableHTMLTagType.OPTION:
+      case DisableableHTMLTagType.SELECT:
+      case DisableableHTMLTagType.TEXTAREA:
         (element as DisableableHTMLElement).disabled = isDisabled;
         break;
       default:
